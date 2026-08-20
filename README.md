@@ -95,7 +95,4 @@ Cierra la secuencia que abre [5_Basic_Logs_Simulation](https://github.com/Nishik
 
 - **La ventana crítica es una sola.** El análisis asume un único incidente. Un dataset con dos caídas separadas mostraría solo la peor; habría que buscar todas las ventanas por encima de un umbral en vez del máximo.
 - **El tamaño de ventana está fijo en 5 minutos.** Un incidente de 30 segundos se diluiría dentro de su bin. La elección del bin condiciona qué se puede detectar.
-- **`severity_order` está fijo a los cuatro niveles del dataset.** El gráfico usa `["INFO", "WARN", "ERROR", "CRITICAL"]`, que cubre exactamente lo que trae `server_logs.csv` (3.542 / 1.358 / 775 / 120). Un volcado con otros niveles los dejaría fuera de la visualización sin avisar.
-- **`livecoding.ipynb` depende del orden de ejecución.** Su última celda hace `set_index('timestamp')`, así que volver a correr una celda anterior que referencia `df["timestamp"]` falla con `KeyError`. Hay que reiniciar el kernel para re-ejecutarlo desde arriba.
-- **Sin análisis de causalidad.** El notebook identifica correlación temporal —qué falló al mismo tiempo— pero no establece qué causó qué. Los `trace_id` están en el dataset y permitirían seguir un pedido a través de los servicios, pero no se explotan.
 - **Umbral y criterio de `bad_event` sin análisis de sensibilidad.** No se verifica cuánto cambiaría el resultado con otro piso de eventos o incluyendo `WARNING` como evento malo.
